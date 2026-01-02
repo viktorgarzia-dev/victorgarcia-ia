@@ -1,0 +1,8 @@
+{
+  "name": "Victor Garcia IA - Personal Brand",
+  "description": "Personal brand website for Victor Garcia IA, focusing on AI education, YouTube growth, 1-on-1 mentorship, and B2B automation solutions.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
