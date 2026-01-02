@@ -12,26 +12,29 @@ export const MentorshipSection: React.FC<MentorshipSectionProps> = ({ onMoreInfo
       description: 'Sesión intensiva de consultoría técnica.',
       price: '97€',
       active: false,
-      url: 'https://buy.stripe.com/test_eVq9AV9Yt6vU41y171fIs00'
+      url: 'https://cal.com/victorgarcia-ia/mentoria-60?overlayCalendar=true'
     },
     {
       title: 'Mentoría 120 minutos',
       description: 'Profundización y resolución de bloqueos complejos.',
       price: '167€',
-      active: true
+      active: true,
+      url: 'https://cal.com/victorgarcia-ia/mentoria-120?overlayCalendar=true'
     },
     {
       title: 'Pack Aceleradora',
       description: '4 Sesiones + Soporte Chat continuo.',
       price: '267€',
-      active: false
+      active: false,
+      url: 'https://cal.com/victorgarcia-ia/pack-aceleradora-4-sesiones?overlayCalendar=true'
     },
     {
       title: 'Formaciones Empresas',
       description: 'Capacitación in-company para equipos.',
       price: 'PRO',
       active: false,
-      highlight: true
+      highlight: true,
+      url: 'https://cal.com/victorgarcia-ia/30min?overlayCalendar=true'
     }
   ];
 
@@ -86,7 +89,7 @@ export const MentorshipSection: React.FC<MentorshipSectionProps> = ({ onMoreInfo
             {/* Hidden on mobile, shown on desktop */}
             <div className="pt-4 hidden lg:block">
               <button
-                onClick={onMoreInfo}
+                onClick={() => window.open('https://cal.com/victorgarcia-ia', '_blank')}
                 className="group relative w-fit bg-primary hover:bg-purple-600 text-white px-10 py-5 rounded-2xl font-display uppercase tracking-tighter text-lg shadow-2xl shadow-primary/30 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3"
               >
                 <span className="material-symbols-outlined group-hover:rotate-12 transition-transform">ads_click</span>
@@ -101,7 +104,7 @@ export const MentorshipSection: React.FC<MentorshipSectionProps> = ({ onMoreInfo
               <div className="flex items-center gap-5 mb-8">
                 <div className="relative">
                   <img
-                    src="../imagenes/image.png"
+                    src="/imagenes/image.png"
                     className="size-20 rounded-2xl object-cover border-2 border-primary/20 shadow-lg"
                     alt="Victor Garcia"
                   />
@@ -130,7 +133,7 @@ export const MentorshipSection: React.FC<MentorshipSectionProps> = ({ onMoreInfo
                       <span className="text-xs text-gray-500 font-medium">
                         {option.description}
                       </span>
-                      <p className="text-sm text-white font-medium mt-2">Victor Garcia IA</p>
+
                     </div>
                     <div className={`text-2xl font-black transition-transform group-hover:scale-110 ${option.highlight ? 'text-primary' : 'text-white'}`}>
                       {option.price}
@@ -145,7 +148,7 @@ export const MentorshipSection: React.FC<MentorshipSectionProps> = ({ onMoreInfo
         {/* Shown only on mobile, after the grid */}
         <div className="flex lg:hidden justify-center reveal active pt-8">
           <button
-            onClick={onMoreInfo}
+            onClick={() => window.open('https://cal.com/victorgarcia-ia', '_blank')}
             className="group relative w-fit bg-primary hover:bg-purple-600 text-white px-10 py-5 rounded-2xl font-display uppercase tracking-tighter text-lg shadow-2xl shadow-primary/30 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3"
           >
             <span className="material-symbols-outlined group-hover:rotate-12 transition-transform">ads_click</span>

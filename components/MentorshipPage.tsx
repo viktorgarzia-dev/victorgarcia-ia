@@ -17,7 +17,7 @@ export const MentorshipPage: React.FC = () => {
     },
     {
       title: 'Mentoría 120 min',
-      price: '147€',
+      price: '167€',
       features: ['Análisis de arquitectura', 'Diseño de flujos en vivo', 'Soporte 24h post-sesión'],
       cta: 'Aplicar Ahora',
       primary: true,
@@ -25,7 +25,7 @@ export const MentorshipPage: React.FC = () => {
     },
     {
       title: 'Pack Aceleradora',
-      price: '297€',
+      price: '267€',
       features: ['4 Sesiones de 60 min', 'Acceso WhatsApp directo', 'Revisión de escenarios'],
       cta: 'Aplicar Ahora',
       primary: false
