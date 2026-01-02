@@ -11,24 +11,26 @@ export const MentorshipPage: React.FC = () => {
       title: 'Mentoría 60 min',
       price: '97€',
       features: ['Consultoría técnica directa', 'Resolución de errores', 'Grabación de la sesión'],
-      cta: 'Comprar Sesión',
+      cta: 'Reservar Sesión',
       primary: false,
-      url: 'https://buy.stripe.com/test_eVq9AV9Yt6vU41y171fIs00'
+      url: 'https://cal.com/victorgarcia-ia/mentoria-60?overlayCalendar=true'
     },
     {
       title: 'Mentoría 120 min',
       price: '167€',
       features: ['Análisis de arquitectura', 'Diseño de flujos en vivo', 'Soporte 24h post-sesión'],
-      cta: 'Aplicar Ahora',
+      cta: 'Reservar Sesión',
       primary: true,
-      featured: true
+      featured: true,
+      url: 'https://cal.com/victorgarcia-ia/mentoria-120?overlayCalendar=true'
     },
     {
       title: 'Pack Aceleradora',
       price: '267€',
       features: ['4 Sesiones de 60 min', 'Acceso WhatsApp directo', 'Revisión de escenarios'],
-      cta: 'Aplicar Ahora',
-      primary: false
+      cta: 'Reservar Pack',
+      primary: false,
+      url: 'https://cal.com/victorgarcia-ia/pack-aceleradora-4-sesiones?overlayCalendar=true'
     }
   ];
 
@@ -99,7 +101,10 @@ export const MentorshipPage: React.FC = () => {
               <p className="text-gray-400 text-lg md:text-xl font-sans mb-8 leading-relaxed font-normal px-2">
                 Ideal para aprender los fundamentos antes de una sesión personalizada técnica.
               </p>
-              <button className="w-fit mx-auto bg-primary hover:bg-purple-600 text-white px-8 py-3 rounded-2xl font-display text-base md:text-lg font-black shadow-xl shadow-primary/20 transition-all uppercase tracking-tighter mt-auto group-hover:scale-[1.02] active:scale-95">
+              <button
+                onClick={() => window.open('https://www.skool.com/victor-garcia-ia-9044', '_blank')}
+                className="w-fit mx-auto bg-primary hover:bg-purple-600 text-white px-8 py-3 rounded-2xl font-display text-base md:text-lg font-black shadow-xl shadow-primary/20 transition-all uppercase tracking-tighter mt-auto group-hover:scale-[1.02] active:scale-95"
+              >
                 Unirse Ahora
               </button>
             </div>
@@ -173,10 +178,10 @@ export const MentorshipPage: React.FC = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button
-                  onClick={scrollToForm}
+                  onClick={() => window.open('https://cal.com/victorgarcia-ia/30min?overlayCalendar=true', '_blank')}
                   className="w-fit mx-auto lg:mx-0 bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-10 py-5 rounded-2xl font-display uppercase tracking-tighter text-lg shadow-xl shadow-fuchsia-600/20 transition-all active:scale-95"
                 >
-                  Contactar Ventas
+                  Agendar Llamada
                 </button>
                 <div className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/5 w-fit mx-auto lg:mx-0">
                   <div className="flex -space-x-2">
