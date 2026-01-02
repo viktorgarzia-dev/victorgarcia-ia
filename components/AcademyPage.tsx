@@ -273,14 +273,14 @@ export const AcademyPage: React.FC = () => {
                 Liderazgo Técnico en IA
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display leading-[0.9] tracking-tighter text-white uppercase font-black">
-                Domina <br />
-                <span className="text-gradient-primary">La IA Aplicada</span>
+                <span className="text-gradient-primary">IA 360 Labs</span>
               </h1>
               <p className="text-base md:text-lg text-gray-400 leading-relaxed font-light max-w-lg mx-auto">
                 Deja de ser un usuario y conviértete en un <span className="text-white font-bold">Arquitecto de IA</span>. Construye flujos autónomos y escala tus resultados.
               </p>
               <div className="flex flex-wrap gap-4 pt-2 justify-center">
                 <button
+                  onClick={() => window.open('https://www.skool.com/victor-garcia-ia-9044', '_blank')}
                   onMouseEnter={() => setIsHoveringCTA(true)}
                   onMouseLeave={() => setIsHoveringCTA(false)}
                   className="w-fit mx-auto bg-primary hover:bg-purple-600 text-white px-8 py-4 rounded-2xl font-display uppercase tracking-tighter text-base md:text-lg transition-all shadow-xl shadow-primary/30 active:scale-95 group flex items-center justify-center gap-3 border border-white/10"
@@ -349,7 +349,10 @@ export const AcademyPage: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-display uppercase font-black text-white mb-8 leading-[0.85] tracking-tighter">
             No seas el último <br /> <span className="text-gradient-primary">en adaptarte</span>
           </h2>
-          <button className="w-fit mx-auto bg-primary hover:bg-purple-600 text-white px-10 py-5 rounded-2xl font-display uppercase tracking-tighter text-base md:text-xl shadow-[0_20px_60px_rgba(168,85,247,0.3)] transition-all hover:scale-105 active:scale-95 border border-white/10">
+          <button
+            onClick={() => window.open('https://www.skool.com/victor-garcia-ia-9044', '_blank')}
+            className="w-fit mx-auto bg-primary hover:bg-purple-600 text-white px-10 py-5 rounded-2xl font-display uppercase tracking-tighter text-base md:text-xl shadow-[0_20px_60px_rgba(168,85,247,0.3)] transition-all hover:scale-105 active:scale-95 border border-white/10"
+          >
             Unirse a IA360 Gratis
           </button>
           <p className="text-gray-600 mt-6 text-[10px] font-black uppercase tracking-[0.5em] opacity-60">Matrícula abierta por tiempo limitado</p>
@@ -426,7 +429,10 @@ export const AcademyPage: React.FC = () => {
             </p>
 
             <div className="flex flex-col items-center gap-6">
-              <button className="w-fit mx-auto bg-primary hover:bg-purple-600 text-white px-10 py-5 rounded-[2rem] font-display uppercase tracking-tighter text-base md:text-xl shadow-[0_25px_80px_rgba(168,85,247,0.4)] transition-all hover:scale-105 active:scale-95 border border-white/20">
+              <button
+                onClick={() => window.open('https://www.skool.com/victor-garcia-ia-9044', '_blank')}
+                className="w-fit mx-auto bg-primary hover:bg-purple-600 text-white px-10 py-5 rounded-[2rem] font-display uppercase tracking-tighter text-base md:text-xl shadow-[0_25px_80px_rgba(168,85,247,0.4)] transition-all hover:scale-105 active:scale-95 border border-white/20"
+              >
                 Matrícula Gratis en Skool
               </button>
 
