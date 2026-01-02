@@ -19,6 +19,7 @@ import { DynamicBackground } from './components/DynamicBackground';
 import { NewsletterSection } from './components/NewsletterSection';
 import { CommandPalette } from './components/CommandPalette';
 import { YouTubePage } from './components/YouTubePage';
+import { SocialChannelsSection } from './components/SocialChannelsSection';
 
 
 
@@ -169,6 +170,8 @@ const App: React.FC = () => {
               <YouTubeSection />
             </div>
 
+            <SocialChannelsSection />
+
             <div id="academia">
               <AcademySection onMoreInfo={navigateToAcademy} />
             </div>
@@ -213,7 +216,7 @@ const App: React.FC = () => {
         onNavigateYouTube={navigateToYouTube}
       />
 
-      <AIAssistant />
+      {/* <AIAssistant /> */}
     </div>
   );
 };
