@@ -29,9 +29,47 @@ export const EnterprisePage: React.FC = () => {
     }
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const data = new URLSearchParams();
+
+    // Collect all selected checkboxes for 'interest'
+    const interests: string[] = [];
+    const checkboxes = e.currentTarget.querySelectorAll('input[name="interest"]:checked');
+    checkboxes.forEach((checkbox) => {
+      interests.push((checkbox as HTMLInputElement).value);
+    });
+
+    data.append('name_role', formData.get('name_role') as string);
+    data.append('company', formData.get('company') as string);
+    data.append('email', formData.get('email') as string);
+    data.append('team_size', formData.get('team_size') as string);
+    data.append('interests', interests.join(', '));
+    data.append('budget', formData.get('budget') as string);
+    data.append('project_desc', formData.get('project_desc') as string);
+    data.append('timestamp', new Date().toISOString());
+    data.append('form_name', 'Formulario empresas');
+
+    try {
+      await fetch('https://hook.eu1.make.com/l4u9pei16obc2uu04kfal2bg4aswe5uu', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: data.toString(),
+      });
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Error sending form:', error);
+      alert('Hubo un error al enviar el mensaje. Por favor intenta de nuevo.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -223,21 +261,21 @@ export const EnterprisePage: React.FC = () => {
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Nombre y Cargo</label>
-                      <input required type="text" placeholder="Ej: Juan Pérez, CEO" className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all placeholder:text-gray-700" />
+                      <input required name="name_role" type="text" placeholder="Ej: Juan Pérez, CEO" className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all placeholder:text-gray-700" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Nombre de la Empresa</label>
-                      <input required type="text" placeholder="Tu Empresa S.L." className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all placeholder:text-gray-700" />
+                      <input required name="company" type="text" placeholder="Tu Empresa S.L." className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all placeholder:text-gray-700" />
                     </div>
                   </div>
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Email Corporativo</label>
-                      <input required type="email" placeholder="nombre@empresa.com" className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all placeholder:text-gray-700" />
+                      <input required name="email" type="email" placeholder="nombre@empresa.com" className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all placeholder:text-gray-700" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Tamaño del Equipo</label>
-                      <select required className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all appearance-none cursor-pointer">
+                      <select required name="team_size" className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all appearance-none cursor-pointer">
                         <option value="1-10">1-10 empleados</option>
                         <option value="11-50">11-50 empleados</option>
                         <option value="51-200">51-200 empleados</option>
@@ -250,7 +288,7 @@ export const EnterprisePage: React.FC = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       {['Generación de Leads', 'Ecosistema de Agentes', 'Automatización Interna', 'Consultoría Estratégica', 'Formación In-Company'].map((interest) => (
                         <label key={interest} className="flex items-center gap-3 bg-[#101622] border border-gray-800 p-4 rounded-xl cursor-pointer hover:border-primary/50 transition-all">
-                          <input type="checkbox" className="size-5 rounded border-gray-800 text-primary focus:ring-primary bg-gray-900" />
+                          <input type="checkbox" name="interest" value={interest} className="size-5 rounded border-gray-800 text-primary focus:ring-primary bg-gray-900" />
                           <span className="text-xs font-bold text-gray-300">{interest}</span>
                         </label>
                       ))}
@@ -258,7 +296,7 @@ export const EnterprisePage: React.FC = () => {
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Presupuesto Estimado Mensual (EUR)</label>
-                    <select required className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all appearance-none cursor-pointer">
+                    <select required name="budget" className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all appearance-none cursor-pointer">
                       <option value="<1k">Menos de 1.000€</option>
                       <option value="1k-3k">1.000€ - 3.000€</option>
                       <option value="3k-10k">3.000€ - 10.000€</option>
@@ -267,10 +305,10 @@ export const EnterprisePage: React.FC = () => {
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Descripción del Proyecto / Reto Actual</label>
-                    <textarea required rows={4} placeholder="Danos un poco de contexto sobre qué procesos quieres optimizar..." className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all resize-none placeholder:text-gray-700"></textarea>
+                    <textarea required name="project_desc" rows={4} placeholder="Danos un poco de contexto sobre qué procesos quieres optimizar..." className="w-full bg-[#101622] border border-gray-800 rounded-2xl px-6 py-4 text-white outline-none focus:border-primary transition-all resize-none placeholder:text-gray-700"></textarea>
                   </div>
-                  <button className="w-fit mx-auto bg-primary hover:bg-purple-600 text-white px-12 py-5 rounded-2xl font-display uppercase tracking-tighter text-lg md:text-xl shadow-xl shadow-primary/30 transition-all active:scale-[0.98] mt-4">
-                    Solicitar Auditoría Corporativa
+                  <button disabled={loading} className="w-fit mx-auto bg-primary hover:bg-purple-600 text-white px-12 py-5 rounded-2xl font-display uppercase tracking-tighter text-lg md:text-xl shadow-xl shadow-primary/30 transition-all active:scale-[0.98] mt-4 disabled:opacity-50">
+                    {loading ? 'Enviando Solicitud...' : 'Solicitar Auditoría Corporativa'}
                   </button>
                   <div className="text-center flex items-center justify-center gap-2 text-gray-600">
                     <span className="material-symbols-outlined text-sm">lock</span>
