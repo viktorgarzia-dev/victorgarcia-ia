@@ -9,22 +9,23 @@ export const ContactForm: React.FC = () => {
     setStatus('loading');
 
     const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      interest: formData.get('interest'),
-      message: formData.get('message'),
-      timestamp: new Date().toISOString()
-    };
+    const data = new URLSearchParams();
+
+    // Add all form fields to URLSearchParams
+    data.append('name', formData.get('name') as string);
+    data.append('email', formData.get('email') as string);
+    data.append('phone', formData.get('phone') as string);
+    data.append('interest', formData.get('interest') as string);
+    data.append('message', formData.get('message') as string);
+    data.append('timestamp', new Date().toISOString());
 
     try {
       await fetch('https://hook.eu1.make.com/l4u9pei16obc2uu04kfal2bg4aswe5uu', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify(data),
+        body: data.toString(),
       });
       setStatus('success');
     } catch (error) {
