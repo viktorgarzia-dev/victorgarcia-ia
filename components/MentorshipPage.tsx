@@ -4,6 +4,40 @@ import { TESTIMONIALS } from '../constants';
 
 export const MentorshipPage: React.FC = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const data = new URLSearchParams();
+
+    // Add all form fields to URLSearchParams
+    data.append('name', formData.get('name') as string);
+    data.append('email', formData.get('email') as string);
+    data.append('phone', formData.get('phone') as string);
+    data.append('level', formData.get('level') as string);
+    data.append('message', formData.get('message') as string);
+    data.append('timestamp', new Date().toISOString());
+    data.append('form_name', 'Formulario Mentorias');
+
+    try {
+      await fetch('https://hook.eu1.make.com/l4u9pei16obc2uu04kfal2bg4aswe5uu', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: data.toString(),
+      });
+      setFormSubmitted(true);
+    } catch (error) {
+      console.error('Error sending form:', error);
+      alert('Hubo un error al enviar el mensaje. Por favor intenta de nuevo.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Solo mantenemos las mentorías individuales en el grid de precios
   const mentorshipTiers = [
@@ -312,25 +346,25 @@ export const MentorshipPage: React.FC = () => {
                   </h2>
                   <p className="text-gray-300 text-sm md:text-base font-light">Cuéntame tu reto o las necesidades de tu equipo. Si veo que puedo darte un ROI claro, te contactaré hoy mismo.</p>
                 </div>
-                <form onSubmit={(e) => { e.preventDefault(); setFormSubmitted(true); }} className="grid gap-6">
+                <form onSubmit={handleSubmit} className="grid gap-6">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
                       <label className="text-[11px] font-black text-white uppercase tracking-widest ml-1 opacity-90">Nombre Completo</label>
-                      <input required type="text" placeholder="Tu nombre" className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-4 text-white focus:border-primary outline-none transition-all placeholder:text-gray-600 text-base" />
+                      <input required name="name" type="text" placeholder="Tu nombre" className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-4 text-white focus:border-primary outline-none transition-all placeholder:text-gray-600 text-base" />
                     </div>
                     <div className="flex flex-col gap-2">
                       <label className="text-[11px] font-black text-white uppercase tracking-widest ml-1 opacity-90">Email Corporativo</label>
-                      <input required type="email" placeholder="email@ejemplo.com" className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-4 text-white focus:border-primary outline-none transition-all placeholder:text-gray-600 text-base" />
+                      <input required name="email" type="email" placeholder="email@ejemplo.com" className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-4 text-white focus:border-primary outline-none transition-all placeholder:text-gray-600 text-base" />
                     </div>
                   </div>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
                       <label className="text-[11px] font-black text-white uppercase tracking-widest ml-1 opacity-90">WhatsApp</label>
-                      <input required type="tel" placeholder="+34 600 000 000" className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-4 text-white focus:border-primary outline-none transition-all placeholder:text-gray-600 text-base" />
+                      <input required name="phone" type="tel" placeholder="+34 600 000 000" className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-4 text-white focus:border-primary outline-none transition-all placeholder:text-gray-600 text-base" />
                     </div>
                     <div className="flex flex-col gap-2">
                       <label className="text-[11px] font-black text-white uppercase tracking-widest ml-1 opacity-90">¿Qué nivel tienes en IA?</label>
-                      <select required className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-4 text-white focus:border-primary outline-none transition-all appearance-none cursor-pointer text-base">
+                      <select required name="level" className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-4 text-white focus:border-primary outline-none transition-all appearance-none cursor-pointer text-base">
                         <option value="basic">Principiante (Usando ChatGPT)</option>
                         <option value="inter">Intermedio (Make/n8n básico)</option>
                         <option value="advanced">Avanzado (Desarrollador/Senior)</option>
@@ -340,10 +374,10 @@ export const MentorshipPage: React.FC = () => {
                   </div>
                   <div className="flex flex-col gap-2">
                     <label className="text-[11px] font-black text-white uppercase tracking-widest ml-1 opacity-90">Tu Reto o Necesidades de Formación</label>
-                    <textarea required rows={4} placeholder="Sé específico: ¿Qué estás intentando construir o qué procesos quieres que tu equipo aprenda a automatizar?" className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-4 text-white focus:border-primary outline-none transition-all resize-none placeholder:text-gray-600 text-base"></textarea>
+                    <textarea required name="message" rows={4} placeholder="Sé específico: ¿Qué estás intentando construir o qué procesos quieres que tu equipo aprenda a automatizar?" className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-4 text-white focus:border-primary outline-none transition-all resize-none placeholder:text-gray-600 text-base"></textarea>
                   </div>
-                  <button className="w-fit mx-auto bg-primary hover:bg-purple-600 text-white px-12 py-5 rounded-xl font-display uppercase tracking-tighter text-xl shadow-xl shadow-primary/20 transition-all active:scale-[0.98] mt-2">
-                    Enviar Solicitud
+                  <button disabled={loading} className="w-fit mx-auto bg-primary hover:bg-purple-600 text-white px-12 py-5 rounded-xl font-display uppercase tracking-tighter text-xl shadow-xl shadow-primary/20 transition-all active:scale-[0.98] mt-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                    {loading ? 'Enviando...' : 'Enviar Solicitud'}
                   </button>
                   <p className="text-xs text-center text-gray-400 uppercase tracking-widest font-bold">Respuesta en menos de 24h vía WhatsApp</p>
                 </form>
