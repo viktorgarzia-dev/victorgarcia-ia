@@ -18,6 +18,7 @@ export const ContactForm: React.FC = () => {
     data.append('interest', formData.get('interest') as string);
     data.append('message', formData.get('message') as string);
     data.append('timestamp', new Date().toISOString());
+    data.append('form_name', 'Formulario General Homepage');
 
     try {
       await fetch('https://hook.eu1.make.com/l4u9pei16obc2uu04kfal2bg4aswe5uu', {
