@@ -62,7 +62,7 @@ export const DynamicBackground: React.FC = () => {
 
             draw() {
                 if (!ctx) return;
-                ctx.fillStyle = 'rgba(124, 58, 237, 0.4)';
+                ctx.fillStyle = 'rgba(124, 58, 237, 0.7)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -86,7 +86,7 @@ export const DynamicBackground: React.FC = () => {
 
                     if (distance < 120) {
                         const opacity = 1 - distance / 120;
-                        ctx.strokeStyle = `rgba(168, 85, 247, ${opacity * 0.2})`;
+                        ctx.strokeStyle = `rgba(168, 85, 247, ${opacity * 0.5})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
@@ -122,7 +122,7 @@ export const DynamicBackground: React.FC = () => {
     return (
         <canvas
             ref={canvasRef}
-            className="fixed inset-0 z-0 pointer-events-none opacity-50 bg-[#101622]"
+            className="fixed inset-0 z-0 pointer-events-none opacity-80 bg-[#101622]"
         />
     );
 };

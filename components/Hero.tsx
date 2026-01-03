@@ -12,11 +12,12 @@ export const Hero: React.FC<HeroProps> = ({ onCTA }) => {
   return (
     <section className="relative overflow-hidden pt-8 pb-8 md:pt-10 md:pb-12 lg:pt-16 lg:pb-20 min-h-[50vh] flex items-center">
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-grid-pattern animate-grid-pan opacity-40"></div>
-        <div className="absolute top-[10%] left-[15%] w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-[100px] animate-blob"></div>
-        <div className="absolute top-[40%] right-[10%] w-[500px] h-[500px] bg-fuchsia-500/10 rounded-full blur-[120px] animate-blob [animation-delay:2s]"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#101622]/20 via-transparent to-[#101622]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#101622_85%)]"></div>
+        <div className="absolute inset-0 bg-grid-pattern animate-grid-pan opacity-50"></div>
+        <div className="absolute top-[10%] left-[15%] w-[500px] h-[500px] bg-purple-600/40 rounded-full blur-[120px] animate-blob mix-blend-screen"></div>
+        <div className="absolute top-[40%] right-[10%] w-[600px] h-[600px] bg-fuchsia-500/30 rounded-full blur-[130px] animate-blob [animation-delay:2s] mix-blend-screen"></div>
+        <div className="absolute bottom-[10%] left-[20%] w-[400px] h-[400px] bg-primary/30 rounded-full blur-[110px] animate-blob [animation-delay:4s] mix-blend-screen"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#101622]/10 via-transparent to-[#101622]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#101622_90%)]"></div>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 md:px-12 text-center relative z-10">
