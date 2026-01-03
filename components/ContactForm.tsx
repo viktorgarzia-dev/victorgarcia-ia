@@ -4,13 +4,34 @@ import React, { useState } from 'react';
 export const ContactForm: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('loading');
-    // Simulación de envío
-    setTimeout(() => {
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      interest: formData.get('interest'),
+      message: formData.get('message'),
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      await fetch('https://hook.eu1.make.com/l4u9pei16obc2uu04kfal2bg4aswe5uu', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
       setStatus('success');
-    }, 1500);
+    } catch (error) {
+      console.error('Error sending form:', error);
+      setStatus('idle');
+      alert('Hubo un error al enviar el mensaje. Por favor intenta de nuevo.');
+    }
   };
 
   if (status === 'success') {
@@ -82,6 +103,7 @@ export const ContactForm: React.FC = () => {
                   <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-1">Nombre</label>
                   <input
                     required
+                    name="name"
                     type="text"
                     placeholder="Tu nombre"
                     className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-3.5 text-white outline-none focus:border-primary transition-all placeholder:text-gray-700"
@@ -91,6 +113,7 @@ export const ContactForm: React.FC = () => {
                   <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-1">Email</label>
                   <input
                     required
+                    name="email"
                     type="email"
                     placeholder="email@ejemplo.com"
                     className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-3.5 text-white outline-none focus:border-primary transition-all placeholder:text-gray-700"
@@ -103,6 +126,7 @@ export const ContactForm: React.FC = () => {
                   <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-1">WhatsApp / Tel</label>
                   <input
                     required
+                    name="phone"
                     type="tel"
                     placeholder="+34 000 000 000"
                     className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-3.5 text-white outline-none focus:border-primary transition-all placeholder:text-gray-700"
@@ -112,6 +136,7 @@ export const ContactForm: React.FC = () => {
                   <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-1">Me interesa...</label>
                   <select
                     required
+                    name="interest"
                     className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-3.5 text-white outline-none focus:border-primary transition-all appearance-none cursor-pointer"
                   >
                     <option value="academia">IA360 Academia (Aprender)</option>
@@ -126,6 +151,7 @@ export const ContactForm: React.FC = () => {
                 <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-1">Tu Reto o Proyecto</label>
                 <textarea
                   required
+                  name="message"
                   rows={4}
                   placeholder="¿En qué puedo ayudarte hoy?"
                   className="bg-[#101622] border border-gray-800 rounded-xl px-4 py-4 text-white outline-none focus:border-primary transition-all resize-none placeholder:text-gray-700"

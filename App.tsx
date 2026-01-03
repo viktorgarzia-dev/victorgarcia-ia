@@ -93,8 +93,7 @@ const App: React.FC = () => {
   }, [currentView]);
 
   const navigateToAcademy = () => {
-    setCurrentView('academy');
-    window.scrollTo(0, 0);
+    window.open('https://www.skool.com/victor-garcia-ia-9044', '_blank');
   };
 
   const navigateToMentorship = () => {
