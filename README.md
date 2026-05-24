@@ -1,20 +1,44 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Ideas de Negocio
 
-# Run and deploy your AI Studio app
+App web para capturar, organizar y desarrollar **ideas y notas de negocios online**, con un **asistente de IA (Google Gemini)** que genera ideas, las valida y sugiere los siguientes pasos. Las notas se guardan en el navegador (localStorage); no requiere cuenta ni backend.
 
-This contains everything you need to run your app locally.
+## Funcionalidades
 
-View your app in AI Studio: https://ai.studio/apps/drive/1KPvyb0bL4KQzt6Jlh3kwnh2mAr6Cx62y
+- **Notas/ideas**: crear, editar y borrar, con título, contenido, etiquetas y estado (`Idea`, `Validando`, `En progreso`, `Archivada`).
+- **Búsqueda y filtros** por texto, etiqueta y estado.
+- **Autoguardado** en `localStorage` (persiste al recargar).
+- **Asistente de IA**:
+  - *Generar ideas* a partir de un nicho.
+  - *Analizar idea* (mercado, monetización, MVP, riesgos).
+  - *Siguientes pasos* accionables.
+  - La salida se puede anexar/reemplazar en la nota actual o crear una nota nueva.
 
-## Run Locally
+## Stack
 
-**Prerequisites:**  Node.js
+React 19 + TypeScript + Vite. Estilos con Tailwind (CDN). IA con `@google/genai`.
 
+## Ejecutar en local
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+**Requisitos:** Node.js
+
+1. Instala dependencias:
+   ```bash
+   npm install
+   ```
+2. (Opcional, para la IA) crea un archivo `.env.local` con tu clave de Gemini:
+   ```bash
+   GEMINI_API_KEY=tu_clave_aqui
+   ```
+   Sin clave, la app funciona igual pero el asistente muestra un aviso en lugar de respuestas.
+3. Arranca el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+   Abre http://localhost:3000
+
+## Compilar para producción
+
+```bash
+npm run build
+npm run preview
+```

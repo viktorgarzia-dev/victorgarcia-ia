@@ -1,8 +1,5 @@
 {
-  "name": "Victor Garcia IA - Personal Brand",
-  "description": "Personal brand website for Victor Garcia IA, focusing on AI education, YouTube growth, 1-on-1 mentorship, and B2B automation solutions.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ]
+  "name": "Ideas de Negocio",
+  "description": "App de ideas y notas para crear negocios online, con asistente de IA (Gemini) que genera, valida y planifica ideas. Persistencia local en el navegador.",
+  "requestFramePermissions": []
 }
