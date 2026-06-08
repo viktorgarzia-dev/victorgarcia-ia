@@ -5,6 +5,7 @@ import { NoteEditor } from './components/NoteEditor';
 import { EmptyState } from './components/EmptyState';
 import { AIAssistantDrawer } from './components/AIAssistantDrawer';
 import { Icon } from './components/Icon';
+import { NoteTemplate } from './constants';
 
 const App: React.FC = () => {
   const {
@@ -27,8 +28,8 @@ const App: React.FC = () => {
     setSidebarOpen(false);
   };
 
-  const handleCreate = () => {
-    createNote();
+  const handleCreate = (preset: NoteTemplate['preset'] = {}) => {
+    createNote(preset);
     setSidebarOpen(false);
   };
 

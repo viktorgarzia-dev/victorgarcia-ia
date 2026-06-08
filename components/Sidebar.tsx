@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { Note, NoteStatus, NOTE_STATUSES } from '../types';
+import { NoteTemplate } from '../constants';
 import { Icon } from './Icon';
+import { NewNoteMenu } from './NewNoteMenu';
 import { NoteListItem } from './NoteListItem';
 
 interface SidebarProps {
@@ -8,7 +10,7 @@ interface SidebarProps {
   selectedId: string | null;
   onSelect: (id: string) => void;
   onDelete: (id: string) => void;
-  onCreate: () => void;
+  onCreate: (preset: NoteTemplate['preset']) => void;
 }
 
 const STATUS_LABELS: Record<NoteStatus, string> = {
@@ -45,13 +47,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside className="flex h-full flex-col gap-3 p-3">
-      <button
-        onClick={onCreate}
-        className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 font-semibold text-white transition hover:bg-primary/90"
-      >
-        <Icon name="add" className="text-lg" />
-        Nueva idea
-      </button>
+      <NewNoteMenu onSelect={onCreate} variant="sidebar" />
 
       <div className="relative">
         <Icon

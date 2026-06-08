@@ -1,8 +1,10 @@
 import React from 'react';
+import { NoteTemplate } from '../constants';
 import { Icon } from './Icon';
+import { NewNoteMenu } from './NewNoteMenu';
 
 interface EmptyStateProps {
-  onCreate: () => void;
+  onCreate: (preset: NoteTemplate['preset']) => void;
   onOpenAI: () => void;
 }
 
@@ -17,13 +19,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({ onCreate, onOpenAI }) =>
       validarlas y planificar los siguientes pasos.
     </p>
     <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-      <button
-        onClick={onCreate}
-        className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 font-semibold text-white transition hover:bg-primary/90"
-      >
-        <Icon name="add" className="text-lg" />
-        Nueva idea
-      </button>
+      <NewNoteMenu onSelect={onCreate} variant="hero" />
       <button
         onClick={onOpenAI}
         className="inline-flex items-center gap-2 rounded-xl bg-background-surface px-5 py-2.5 font-semibold text-zinc-200 ring-1 ring-white/10 transition hover:ring-primary/40"
